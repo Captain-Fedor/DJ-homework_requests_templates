@@ -16,8 +16,8 @@ def bus_stations(request):
             bus_station_list.append(row)
     paginator = Paginator(bus_station_list, 5)
     page_number = int(request.GET.get('page', 1))
-    page_content = paginator.get_page(page_number)
-    context = {'bus_stations': page_content, 'page': page_number}
+    page = paginator.get_page(page_number)
+    context = {'page': page, 'page_number': page_number}
     #     'bus_stations': ...,
     #     'page': ...,
 

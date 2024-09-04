@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,10 +5,11 @@
     <title>Рецепты</title>
 </head>
 <body>
-<p>
-    {{ recipe }}
-</p>
 
+<p>{{recipe_name}}</p>
+{% for ingredient, amount in recipe.items %}
+    <p>{{ ingredient }}: {{ amount }}</p>
+{% endfor %}
 </body>
 </html>
 
@@ -23,7 +21,7 @@
 <!--    <title>Рецепты</title>-->
 <!--</head>-->
 <!--<body>-->
-<!--{% for ingredient, amount in recipe.items %}-->
+<!--{% for ingredient, amount in recipe_name.items %}-->
 <!--    <p>{{ ingredient }}: {{ amount }}</p>-->
 <!--{% empty %}-->
 <!--    <p>Такого рецепта не знаю :(</p>-->

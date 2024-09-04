@@ -8,9 +8,9 @@ def home_view(request):
 def recipe_view(request):
     DATA = {
         'omlet': {
-            'яйца, шт': '2',
-            'молоко, л': '0.1',
-            'соль, ч.л.': '0.5',
+            'яйца, шт': 2,
+            'молоко, л': 0.1,
+            'соль, ч.л.': 0.5,
         },
         'pasta': {
             'макароны, г': 0.3,
@@ -26,7 +26,12 @@ def recipe_view(request):
     recipe_name = request.META['PATH_INFO'].strip('/')
     if recipe_name not in DATA.keys():
         return HttpResponse('такого рецепта нет')
-    context = {recipe_name: DATA.get(recipe_name)}
+    servings = int(request.GET.get('servings', 1))
+    for recepie in DATA.keys():
+        for key, value in DATA[recepie].items():
+            DATA[recepie][key] *= servings
+
+    context = {'recipe': DATA.get(recipe_name), 'recipe_name': recipe_name}
     return render(request, 'calculator/index.html', context)
 
 
